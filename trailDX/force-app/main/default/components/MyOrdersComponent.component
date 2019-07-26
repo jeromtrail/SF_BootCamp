@@ -1,0 +1,29 @@
+<apex:component >
+  <apex:attribute name="myComponents" description="This VF component" type="String" required="true"/>
+    
+    <div class = "myCSS">
+        <apex:stylesheet value="{!URLFOR($Resource.VFResource, '/css/mycss.css')}"/>;  
+    </div>
+   
+    <div class = "myJscript">
+        <apex:includeScript value="{!$Resource.VFResource}" id="myjv"/>
+    </div>
+    
+    <div class = "myImage">
+        <apex:image url="{!URLFOR($Resource.VFResource,'images/1.png')}" width="50" height="50"/>
+    </div>
+    
+    <div class = "myHeader">
+        <h1>
+            This is my Header
+        </h1>
+    </div>
+    
+    <div class = "myFooter">
+        <h1>
+            This is my Footer
+        </h1>
+    </div>
+    
+    
+</apex:component>

@@ -1,0 +1,6 @@
+<aura:event type="APPLICATION" description="Event template">
+<aura:attribute name = "origin" type="string"/>
+<aura:attribute name = "destination" type="string"/>
+<aura:attribute name = "desti" type="Date"/>
+<aura:attribute name = "selectid" type="String"/>
+</aura:event>

@@ -1,0 +1,40 @@
+<apex:page controller="MyOrdersCls" >
+<apex:form >
+    
+         
+    <apex:PageBlock >
+     <apex:pageBlockButtons location="top">
+     <apex:commandButton value="Search" action="{!searchOrders}"/>
+    <apex:inputText value="{!OrderNum}" label="Order Search"/>
+ 	 </apex:pageBlockButtons>
+        
+    </apex:PageBlock>
+    
+ 
+ 
+   <apex:pageBlock >
+    <apex:outputPanel rendered="{!OrderList.size>0}" >  
+         <apex:pageBlockTable value="{!OrderList}" var="record">
+         <!-- <apex:column headerValue="Order Number" value="{!record.OrderNumber}"/> -->
+             
+        <apex:column > <apex:outputLink value="{!$Page.MyOrderDetail + '?id='}{!record.Id}">{!record.OrderNumber}</apex:outputLink>          
+            </apex:column>
+          <apex:column headerValue="Account Name" value="{!record.Account.Name}"/>
+          <apex:column headerValue="Created Date" value="{!record.CreatedDate}"/>  
+          <apex:column headerValue="Status" value="{!record.Status}"/>  
+        </apex:pageBlockTable>
+    </apex:outputPanel>
+       
+     
+		<apex:panelGrid columns="5">
+        <apex:commandLink action="{!setOrd.Previous}">PREVIOUS</apex:commandLink>
+		<apex:commandLink action="{!setOrd.First}">FIRST</apex:commandLink>
+		<apex:commandLink action="{!setOrd.Next}">NEXT</apex:commandLink>
+		<apex:commandLink action="{!setOrd.Last}">LAST</apex:commandLink>
+		</apex:panelGrid>
+       
+
+    </apex:pageBlock>
+   
+</apex:form>
+</apex:page>

@@ -1,0 +1,8 @@
+<apex:page sidebar="​false">
+<h1>Opportunity Discovery</h1>
+<wave:dashboard dashboardId="0FK6F000000LjT8GA4"
+                 showTitle="true"
+                 height="475px"
+                 openLinksInNewWindow="true"
+/>
+</apex:page>

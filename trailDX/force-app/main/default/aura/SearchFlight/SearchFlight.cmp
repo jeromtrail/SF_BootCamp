@@ -1,0 +1,41 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="FlightControl">
+    <aura:attribute name="sObjectName" type="String" default="Flight__c"/>
+    <aura:attribute name="sObjectName2" type="String" default="Flight__c"/>
+    <aura:attribute name="fieldName" type="String" default="Depart_From__c" />
+    <aura:attribute name="fieldName2" type="String" default="Depart_To__c" />
+    <aura:attribute name="picklistValues" type="list" />
+    <aura:attribute name="picklistValues2" type="list" />
+    <aura:attribute name="origin" type="string"/>
+    <aura:attribute name="desti" type="string"/>
+    <!-- <aura:attribute name="depart" type="Flight__c" default="{'sobject' : 'Flight__c'}"/> -->
+    <aura:attribute name="depart" type="Date"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <!--c:SearchFlight sObjectName="Flight__c" fieldName="Depart_From__c" picklistValues="{!v.picklistValues}" />-->
+    
+    
+    <lightning:select name="select1" label="Origin" value="{!v.origin}">
+        <option value="none" >--NONE--</option>
+        <aura:iteration items="{!v.picklistValues}" var="item">
+            <option value="{!item}" >{!item}</option>
+        </aura:iteration>
+    </lightning:select>
+    
+    
+    <lightning:select name="select2" label="Destination" value="{!v.desti}">
+        <option value="none" >--NONE--</option>
+        <aura:iteration items="{!v.picklistValues2}" var="item2">
+            <option value="{!item2}">{!item2}</option>
+        </aura:iteration>
+    </lightning:select>
+    
+    
+    <lightning:input type="date" aura:id="datesch" label="Departure Date"
+                     name="departdate"
+                     format="yyyy/MM/dd"
+                     value="{!v.depart}"/>
+    <lightning:button label="Find Fligths" 
+                      class="slds-m-top--medium"
+                      variant="brand"
+                      onclick="{!c.searchFlight}"/> 
+    
+</aura:component>

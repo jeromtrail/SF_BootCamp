@@ -1,0 +1,99 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="DonataControl" >
+
+   <aura:attribute name="svdonate" type="Donation__c" default="{'sobject' : 'Donation__c'}"/>
+	<aura:attribute name ="donations" type="Donation__c[]"/>
+	<aura:attribute name ="donList" type="Donation__c[]"/>
+	<aura:attribute name ="TotAmnt" type="Donation__c"/>
+    <aura:handler name = "init" action="{!c.doInit}" value="{!this}"/>
+    
+    
+    <lightning:layout class="slds-page-header slds-page-header--object-home">
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label" >Donation</h1>
+                <h2 class="slds-text-heading--medium">Donate Form</h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    <!-- / PAGE HEADER -->
+
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small" size="6">
+
+            
+             <div aria-labelledby="newdonateform">
+        <!-- BOXED AREA -->
+        <fieldset class="slds-box slds-theme--default slds-container--small">
+        <legend id="newdonateform" class="slds-text-heading--small 
+          slds-p-vertical--medium">
+          Add Donation
+        </legend>
+  
+        <!-- CREATE NEW EXPENSE FORM -->
+        <form class="slds-form--stacked"  >          
+            <lightning:input aura:id="donateform" label="Donor Name"
+                             name="donorname"
+                             required="true"
+                            value="{!v.svdonate.Donor_Name__c}"
+                             /> 
+             				
+            <lightning:input type="number" aura:id="donateform" label="Amount"
+                             name="amount"
+                             formatter="currency"
+                             required="true"
+                             value="{!v.svdonate.Amount__c}"
+                             messageWhenRangeUnderflow="Enter an amount that's at least 1"/>
+          	<lightning:input type="date" aura:id="donateform" label="Donation Date"
+                             name="donationdate"
+                             value="{!v.svdonate.Donation_Date__c}"/>
+            <lightning:input aura:id="donateform" label="Notes"
+                             name="notes"
+                             value="{!v.svdonate.Note__c}"
+                             placeholder="Notes"/>
+            <lightning:button label="Create Donation" 
+                              class="slds-m-top--medium"
+                              variant="brand"
+                              onclick="{!c.saveAction}"/>
+        </form>
+       
+  
+      </fieldset>
+      <!-- / BOXED AREA -->
+    </div>
+            
+                          
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer" >
+             <tr >
+                 <th >Name </th >
+                 <th >Amount </th >
+             </tr >
+             <aura:iteration items="{!v.donList}" var="sObj" >
+                 <tr >
+                     <td >{!sObj.Donor_Name__c} </td >
+                     <td >{!sObj.Amount__c} </td >
+                     
+                 </tr >     
+             </aura:iteration >
+         </table >
+  	
+    	
+
+     
+      
+ 	
+	<lightning:listView aura:id="listViewDonation"
+    objectApiName="Donation__c"
+    listName="All"
+    rows="5"
+    showSearchBar="true"
+    showActionBar="false"
+    enableInlineEdit="true"
+    showRowLevelActions="true"/>
+      
+    
+    
+</aura:component>

@@ -1,0 +1,96 @@
+<apex:page extensions="MyOrdersDetailCls" standardController="Order" standardStylesheets="false" showHeader="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"> 
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <head>
+         <script>
+            function showModal(modalblock) {
+                var modal = document.getElementById(modalblock);
+                modal.style.display = "block";
+            }
+        </script>
+    </head>    
+    <div class="slds-scope">
+                
+<apex:form >
+     
+
+    <h1>
+         Order Number
+    </h1>
+     <apex:outputField value="{!orderList.OrderNumber}"/>
+     <b></b><h1>
+         Account Name
+    </h1>
+     <apex:outputField value="{!orderList.Account.Name}"/>
+    <h1>
+         Total Amount
+     </h1>
+     <apex:outputField value="{!orderList.TotalAmount}"/>
+    <h1>
+         Status
+     </h1>
+     <apex:outputField value="{!orderList.Status}"/>
+    
+<!-- Display Order Product Details -->	
+     <apex:repeat value="{!orderProdList}" var="fetch">
+     <table cellpadding = "5" cellspacing = "5">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Unit Price</th>
+                    </tr>
+                    <tr>
+                        <td>{!fetch.Product2.Name }</td>
+                        <td>{!fetch.UnitPrice }</td>
+                        <td><apex:outputLink value="https://www.salesforce.com">View Detail</apex:outputLink></td>
+                    </tr>
+                </table>
+    </apex:repeat>
+   
+    <!-- <apex:actionFunction action="{!recSave}" name="SaveRecord" rerender="showstate">
+        <apex:param name="firstParam" assignTo="{!}" value="" />
+    	</apex:actionFunction>
+   -->
+    
+    
+    //<script>
+//function recSave(){
+    //var proddetail = document.getElementById('{!ProductList}').value;
+    // Prodsave(); 
+    // }
+ 
+    // </script> 
+  
+    <!-- modal -->
+    <div style= "height:640px; display: none " id="modalblock">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+        <header class="slds-modal__header">
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+        </svg>
+        <span class="slds-assistive-text">Close</span>
+        </button>
+        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Modal Header</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+       <!-- <apex:inputField value="{!ProductList.Descriotion}" id="descbox"/> -->
+        <!-- <apex:outputPanel id="thePanel" layout="block">My div
+
+
+			</apex:outputPanel> -->    
+        
+        </div>
+        <footer class="slds-modal__footer">
+        <button class="slds-button slds-button_neutral">Cancel</button>
+        <button class="slds-button slds-button_brand">Save</button>
+        </footer>
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+	</div>
+    
+    
+</apex:form>
+    </div>                            
+    </html>
+</apex:page>

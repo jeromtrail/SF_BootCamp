@@ -1,0 +1,9 @@
+<aura:component >
+    <!--<aura:registerEvent name="send" type="c:SendMessageEvent" />
+    <button onclick="{!c.sendMessage}">Send</button> -->
+    
+    <aura:method name = "sayHello"
+                 action = "{!c.handleSayHello}"
+                 access = "public"/>
+    
+</aura:component>

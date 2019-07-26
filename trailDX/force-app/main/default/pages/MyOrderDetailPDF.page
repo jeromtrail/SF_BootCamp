@@ -1,0 +1,39 @@
+<apex:page renderAs="PDF" extensions="MyOrdersDetailCls" standardController="Order">
+<apex:form >
+      
+
+    <h1>
+         Order Number
+    </h1>
+     <apex:outputField value="{!orderList.OrderNumber}"/>
+     <h1>
+         Account Name
+    </h1>
+     <apex:outputField value="{!orderList.Account.Name}"/>
+    <h1>
+         Total Amount
+    </h1>
+     <apex:outputField value="{!orderList.TotalAmount}"/>
+    <h1>
+         Status
+    </h1>
+     <apex:outputField value="{!orderList.Status}"/>
+    
+<!-- Display Order Product Details -->	
+     <apex:repeat value="{!orderProdList}" var="fetch">
+     <table cellpadding = "5" cellspacing = "5">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Unit Price</th>
+                    </tr>
+                    <tr>
+                        <td>{!fetch.Product2.Name }</td>
+                        <td>{!fetch.UnitPrice }</td>
+                        <td><apex:outputLink value="https://www.salesforce.com">View Detail</apex:outputLink></td>
+                    </tr>
+                </table>
+    </apex:repeat>
+
+    
+</apex:form>
+</apex:page>

@@ -1,0 +1,11 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <!--<aura:handler event="c:sendMessageEvent" action ="{!c.handleSend}"/> -->
+    <!-- <c:sendMessage send="{!c.handleSend}" /> -->
+    
+   <!--  <c:sendMessage/> -->
+    
+    
+    <c:sendMessage aura:id="greeter"/>
+    <button onclick ="{!c.doGreet}">Greet</button>
+    
+</aura:component>

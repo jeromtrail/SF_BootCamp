@@ -1,0 +1,126 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="FlightControl">
+    <aura:attribute name ="flightList" type="Flight__c[]"/>
+    <aura:attribute name = "selectflight" type = "Flight__c[]"/>
+    <aura:attribute name="savepass" type="Contact" default="{'sobject' : 'Contact'}"/>
+    <aura:handler event="c:searchFlightEvent" action="{!c.getFlight}"/>
+    <aura:attribute name = "text" type = "Flight__c"/>
+    <aura:attribute name = "selectedflight" type = "Flight__c"/>
+    
+    <aura:attribute name="nme" type="String"/>
+    <aura:attribute name="dpDate" type="String"/>
+    <aura:attribute name="org" type="String"/>
+    <aura:attribute name="destin" type="String"/>
+    <aura:attribute name="selectedList" type="Flight__c[]"/>
+    <aura:attribute name="selectedInfo" type="list"/>
+    <aura:attribute name = "fname" type="String"/>
+    <aura:attribute name = "lname" type="String"/>
+    <aura:attribute name = "em" type="String"/>
+    <aura:attribute name = "flightId" type="String"/>
+    
+    
+    <lightning:button label="Book Flight"
+                      iconName="utility:new_window"
+                      iconPosition="right"
+                      variant="brand"
+                      onclick="{!c.newPopup}"
+                      />
+    <!--Modal -->
+    <div role="dialog" tabindex="-1" aria-labelledby="header43" aura:id="Modalbox1" class="slds-modal slds-modal_large">
+        <div class="slds-modal__container" style="width: 65%;">
+            <div class="slds-modal__header">
+                Passenger Details
+            </div>
+            
+            <div class="slds-modal__content slds-p-around--medium">
+                <div class="slds-p-left_xx-large slds-p-right_xx-large">
+                    
+                </div>    
+                <div class="slds-grid slds-p-top_medium">
+                    <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " >
+                        {!v.selectedFlight.Name}
+                        <lightning:input label="First Name" name="fname" value="{!v.fname}"/> 
+                    </div>
+                </div>
+                
+                <div class="slds-grid slds-p-top_medium">
+                    <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " >
+                        <lightning:input label="Last Name" name="lname" value="{!v.lname}"/> 
+                    </div>
+                </div>
+                
+                <div class="slds-grid slds-p-top_medium">
+                    <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " >
+                        <lightning:input label="Email" name="eml" value="{!v.em}"/> 
+                    </div>
+                </div>
+            </div>
+            
+            
+            <lightning:card title="Flight Details">
+                
+                <p class="slds-p-horizontal_small">
+                    Flight Number: {!v.nme}
+                </p>
+                <p class="slds-p-horizontal_small">
+                    Origin: {!v.org}
+                </p>
+                <p class="slds-p-horizontal_small">
+                    Departure Date: {!v.dpDate}
+                </p>
+                <p class="slds-p-horizontal_small">
+                    Destination: {!v.destin}
+                </p>
+            </lightning:card>
+            
+            
+            <div class="slds-modal__footer">
+                <lightning:button label="Save" onclick="{!c.saveModal}" />
+                <lightning:button label="close" onclick="{!c.closeNewModal}" />
+            </div>
+            
+            
+            
+        </div>
+        
+        
+        
+    </div> 
+    <!--Modal -->
+    
+
+    
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer" >
+        <tr >
+            <th > </th >
+            <th >Flight Number </th >
+            <th >Depart/Arrive</th >
+            <th >Departure Time</th >
+            <th >Arrival Time</th >
+            <th >Fly Only</th >
+            <th >Fly + Baggage</th >
+            <th >Fly + Baggage + Meal</th >
+            <th >Available Seats</th>
+           
+        </tr >
+        
+        <aura:iteration items="{!v.flightList}" var="sObj" >
+            <tr>
+                <ui:inputRadio  text="{#sObj}" change="{!c.getValue}" name="nme"/>
+                <td>{!sObj.Name} </td >
+                <td>{!sObj.Depart_Arrive__c} </td >
+                <td><lightning:formattedDateTime value="{!sObj.Departure_TIme__c}" hour="2-digit" minute="2-digit"/></td>
+                <td><lightning:formattedDateTime value="{!sObj.Arrival_Time__c}" hour="2-digit" minute="2-digit"/></td>
+                <td><lightning:formattedNumber value="{!sObj.Fly_Only__c}" style="currency" currencyCode="USD"/></td>
+                <td><lightning:formattedNumber value="{!sObj.Fly_Baggage__c}" style="currency" currencyCode="USD"/></td>
+                <td><lightning:formattedNumber value="{!sObj.Fly_Baggage_Meal__c}" style="currency" currencyCode="USD"/></td>
+               	<td>{!sObj.Available_Seats__c} </td >
+            </tr >     
+        </aura:iteration >
+        
+        
+        
+    </table >
+    
+    
+    
+</aura:component>
